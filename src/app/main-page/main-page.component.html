@@ -1,0 +1,29 @@
+<div class="container">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+        <mat-form-field appearance="fill">
+            <mat-label>Favorite Number</mat-label>
+            <mat-select formControlName="favoriteNumber">
+                @for (number of favoriteNumberList; track $index) {
+                    <mat-option [value]="number">
+                        {{ number }}
+                    </mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+      
+        <mat-form-field appearance="fill">
+            <mat-label>Number Length</mat-label>
+            <input matInput type="number" formControlName="numberLength"/>
+        </mat-form-field>
+    
+        <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">
+            SUBMIT
+        </button>
+    </form>
+    @if (generatedNumber$ | async; as generatedNumber) {
+        <div class="result">
+            <p>Generated Number:</p>
+            <h1>{{ generatedNumber }}</h1>
+        </div>
+    }
+</div>
